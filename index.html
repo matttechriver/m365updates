@@ -1,476 +1,388 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tech River — M365 Weekly Briefing · March 30, 2026</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tech River | M365 Weekly Briefing — April 6, 2026</title>
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap');
+
   :root {
     --bg: #0c0f14;
-    --surface: #13181f;
+    --surface: #131720;
     --surface2: #1a2030;
-    --border: #252e3d;
-    --accent: #3b82f6;
-    --accent2: #22d3ee;
-    --red: #ef4444;
-    --orange: #f97316;
-    --yellow: #eab308;
-    --green: #22c55e;
-    --text: #e2e8f0;
-    --muted: #64748b;
-    --muted2: #94a3b8;
+    --border: #252d40;
+    --accent-blue: #3b82f6;
+    --accent-cyan: #22d3ee;
+    --accent-amber: #f59e0b;
+    --accent-red: #ef4444;
+    --accent-green: #10b981;
+    --accent-purple: #a78bfa;
+    --text-primary: #e2e8f0;
+    --text-secondary: #94a3b8;
+    --text-muted: #475569;
+    --high: #ef4444;
+    --medium: #f59e0b;
+    --low: #10b981;
   }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
     background: var(--bg);
-    color: var(--text);
-    font-family: 'Syne', sans-serif;
+    color: var(--text-primary);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
     min-height: 100vh;
-    overflow-x: hidden;
   }
 
   /* Header */
   .header {
-    background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #0f172a 100%);
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
     border-bottom: 1px solid var(--border);
-    padding: 32px 48px;
+    padding: 28px 32px 24px;
     position: relative;
     overflow: hidden;
   }
-
   .header::before {
     content: '';
     position: absolute;
     top: -60px; right: -60px;
-    width: 300px; height: 300px;
-    background: radial-gradient(circle, rgba(59,130,246,0.15) 0%, transparent 70%);
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(59,130,246,0.12) 0%, transparent 70%);
     pointer-events: none;
   }
-
   .header-top {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    gap: 24px;
+    flex-wrap: wrap;
+    gap: 12px;
   }
-
   .brand {
     display: flex;
-    align-items: center;
-    gap: 12px;
+    flex-direction: column;
+    gap: 4px;
   }
-
-  .logo-box {
-    width: 40px; height: 40px;
-    background: var(--accent);
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 20px;
-    font-weight: 800;
-    color: white;
-    flex-shrink: 0;
-  }
-
-  .brand-text {
-    font-size: 13px;
+  .brand-name {
+    font-family: 'IBM Plex Mono', monospace;
     font-weight: 600;
-    color: var(--muted2);
-    letter-spacing: 0.15em;
+    font-size: 11px;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
+    color: var(--accent-cyan);
   }
-
-  .header-meta {
-    text-align: right;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    color: var(--muted);
-    line-height: 1.8;
-  }
-
-  .briefing-title {
-    font-size: 36px;
-    font-weight: 800;
+  .brief-title {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text-primary);
     letter-spacing: -0.02em;
-    color: var(--text);
-    margin-top: 20px;
-    line-height: 1.1;
   }
-
-  .briefing-title span {
-    color: var(--accent2);
-  }
-
-  .subtitle {
-    font-size: 14px;
-    color: var(--muted2);
-    margin-top: 8px;
-    font-weight: 400;
-  }
-
-  /* Summary bar */
-  .summary-bar {
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-    padding: 16px 48px;
+  .header-meta {
     display: flex;
-    gap: 32px;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+  }
+  .date-badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--text-secondary);
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    padding: 4px 10px;
+    border-radius: 4px;
+  }
+  .stats-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
     flex-wrap: wrap;
   }
-
-  .summary-item {
+  .stat-chip {
     display: flex;
     align-items: center;
-    gap: 8px;
-    font-size: 13px;
-    color: var(--muted2);
-    font-family: 'JetBrains Mono', monospace;
+    gap: 6px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    color: var(--text-secondary);
   }
-
-  .summary-dot {
-    width: 8px; height: 8px;
+  .stat-chip .dot {
+    width: 7px; height: 7px;
     border-radius: 50%;
   }
+  .dot-red { background: var(--high); }
+  .dot-amber { background: var(--medium); }
+  .dot-green { background: var(--low); }
+  .stat-num { font-family: 'IBM Plex Mono', monospace; font-weight: 600; color: var(--text-primary); }
 
-  /* Tab nav */
-  .nav {
+  /* Nav tabs */
+  .nav-wrap {
     background: var(--surface);
     border-bottom: 1px solid var(--border);
-    padding: 0 48px;
-    display: flex;
-    gap: 0;
+    padding: 0 32px;
     overflow-x: auto;
   }
-
-  .tab-btn {
-    padding: 14px 20px;
+  .nav-tabs {
+    display: flex;
+    gap: 2px;
+    list-style: none;
+    white-space: nowrap;
+  }
+  .nav-tabs li button {
     background: none;
     border: none;
-    border-bottom: 2px solid transparent;
-    color: var(--muted2);
-    font-family: 'Syne', sans-serif;
+    padding: 14px 16px 12px;
+    font-family: 'IBM Plex Sans', sans-serif;
     font-size: 13px;
-    font-weight: 600;
+    color: var(--text-muted);
     cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
     white-space: nowrap;
-    transition: all 0.15s;
-    letter-spacing: 0.02em;
+  }
+  .nav-tabs li button:hover { color: var(--text-secondary); }
+  .nav-tabs li button.active {
+    color: var(--accent-cyan);
+    border-bottom-color: var(--accent-cyan);
   }
 
-  .tab-btn:hover { color: var(--text); }
-  .tab-btn.active {
-    color: var(--accent2);
-    border-bottom-color: var(--accent2);
-  }
+  /* Main layout */
+  .main { padding: 24px 32px; max-width: 1200px; margin: 0 auto; }
 
-  /* Main content */
-  .main {
-    padding: 32px 48px 64px;
-    max-width: 1400px;
-  }
-
-  .tab-panel { display: none; }
-  .tab-panel.active { display: block; }
-
-  /* Section header */
-  .section-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 24px;
-  }
-
-  .section-icon {
-    font-size: 24px;
-    line-height: 1;
-  }
-
-  .section-title {
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--text);
-  }
-
-  .section-count {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 2px 10px;
-    font-size: 11px;
-    font-family: 'JetBrains Mono', monospace;
-    color: var(--muted2);
-    margin-left: auto;
-  }
+  /* Section */
+  .section { display: none; }
+  .section.active { display: block; }
 
   /* Cards */
-  .cards { display: grid; gap: 16px; }
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 14px;
+    margin-top: 4px;
+  }
 
   .card {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px 24px;
+    border-radius: 8px;
+    padding: 16px 18px;
     position: relative;
-    transition: border-color 0.15s, transform 0.15s;
+    transition: border-color 0.15s;
   }
-
-  .card:hover {
-    border-color: var(--accent);
-    transform: translateY(-1px);
-  }
-
-  .card-left-bar {
+  .card:hover { border-color: #334155; }
+  .card-accent {
     position: absolute;
-    left: 0; top: 12px; bottom: 12px;
+    top: 0; left: 0;
     width: 3px;
-    border-radius: 0 3px 3px 0;
+    height: 100%;
+    border-radius: 8px 0 0 8px;
   }
-
-  .priority-high .card-left-bar { background: var(--red); }
-  .priority-medium .card-left-bar { background: var(--orange); }
-  .priority-low .card-left-bar { background: var(--green); }
+  .card-accent.high { background: var(--high); }
+  .card-accent.medium { background: var(--medium); }
+  .card-accent.low { background: var(--low); }
 
   .card-header {
     display: flex;
+    justify-content: space-between;
     align-items: flex-start;
-    gap: 12px;
-    margin-bottom: 10px;
-    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 8px;
+    padding-left: 4px;
   }
-
   .card-title {
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--text);
-    flex: 1;
-    min-width: 200px;
-  }
-
-  .badges {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-    flex-shrink: 0;
-  }
-
-  .badge {
-    padding: 3px 9px;
-    border-radius: 20px;
-    font-size: 11px;
+    font-size: 13px;
     font-weight: 600;
-    letter-spacing: 0.03em;
-    font-family: 'JetBrains Mono', monospace;
-    white-space: nowrap;
+    color: var(--text-primary);
+    line-height: 1.4;
+    flex: 1;
   }
-
-  .badge-high { background: rgba(239,68,68,0.15); color: #fca5a5; border: 1px solid rgba(239,68,68,0.3); }
-  .badge-medium { background: rgba(249,115,22,0.15); color: #fdba74; border: 1px solid rgba(249,115,22,0.3); }
-  .badge-low { background: rgba(34,197,94,0.15); color: #86efac; border: 1px solid rgba(34,197,94,0.3); }
-  .badge-admin { background: rgba(59,130,246,0.12); color: #93c5fd; border: 1px solid rgba(59,130,246,0.25); }
-  .badge-enduser { background: rgba(168,85,247,0.12); color: #d8b4fe; border: 1px solid rgba(168,85,247,0.25); }
-  .badge-both { background: rgba(34,211,238,0.12); color: #67e8f9; border: 1px solid rgba(34,211,238,0.25); }
-
-  .card-meta {
+  .badge-row {
     display: flex;
-    gap: 16px;
-    margin-bottom: 10px;
-    flex-wrap: wrap;
-  }
-
-  .meta-item {
-    display: flex;
-    align-items: center;
     gap: 5px;
-    font-size: 12px;
-    color: var(--muted);
-    font-family: 'JetBrains Mono', monospace;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+  .badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .badge-high { background: rgba(239,68,68,0.15); color: #fca5a5; border: 1px solid rgba(239,68,68,0.3); }
+  .badge-medium { background: rgba(245,158,11,0.15); color: #fcd34d; border: 1px solid rgba(245,158,11,0.3); }
+  .badge-low { background: rgba(16,185,129,0.15); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.3); }
+  .badge-admin { background: rgba(59,130,246,0.12); color: #93c5fd; border: 1px solid rgba(59,130,246,0.25); }
+  .badge-user { background: rgba(167,139,250,0.12); color: #c4b5fd; border: 1px solid rgba(167,139,250,0.25); }
+  .badge-both { background: rgba(34,211,238,0.1); color: #67e8f9; border: 1px solid rgba(34,211,238,0.25); }
+
+  .card-date {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    padding-left: 4px;
+    margin-bottom: 8px;
+  }
+  .card-date span {
+    color: var(--accent-amber);
   }
 
-  .meta-icon { font-size: 11px; }
-
-  .card-desc {
-    font-size: 13.5px;
-    color: var(--muted2);
-    line-height: 1.6;
-    margin-bottom: 14px;
+  .card-body {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.55;
+    padding-left: 4px;
   }
 
   .card-action {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 12px 16px;
+    margin-top: 10px;
+    padding: 10px 12px;
+    background: rgba(59,130,246,0.07);
+    border: 1px solid rgba(59,130,246,0.18);
+    border-radius: 6px;
+    font-size: 12px;
+    color: #93c5fd;
+    line-height: 1.5;
   }
-
-  .card-action-label {
-    font-size: 10px;
+  .card-action::before {
+    content: '→ ';
     font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--accent2);
-    margin-bottom: 6px;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'IBM Plex Mono', monospace;
   }
 
-  .card-action-text {
-    font-size: 13px;
-    color: var(--text);
-    line-height: 1.6;
+  /* Action required cards */
+  .card.urgent {
+    border-color: rgba(239,68,68,0.3);
+    background: linear-gradient(135deg, rgba(239,68,68,0.04) 0%, var(--surface) 40%);
   }
+
+  /* Retirement table */
+  .table-wrap {
+    overflow-x: auto;
+    margin-top: 4px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  thead th {
+    background: var(--surface2);
+    padding: 10px 14px;
+    text-align: left;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  tbody tr {
+    border-bottom: 1px solid rgba(37,45,64,0.7);
+    transition: background 0.1s;
+  }
+  tbody tr:hover { background: rgba(255,255,255,0.025); }
+  tbody tr:last-child { border-bottom: none; }
+  tbody td {
+    padding: 10px 14px;
+    color: var(--text-secondary);
+    vertical-align: top;
+  }
+  .td-feature { color: var(--text-primary); font-weight: 500; max-width: 220px; }
+  .td-date { font-family: 'IBM Plex Mono', monospace; font-size: 11px; white-space: nowrap; color: var(--accent-amber); }
+  .td-notes { font-size: 12px; color: var(--text-muted); max-width: 280px; }
 
   /* Next Steps */
-  .steps-grid { display: grid; gap: 12px; }
-
-  .step-card {
+  .steps-list { display: flex; flex-direction: column; gap: 10px; margin-top: 4px; }
+  .step-item {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 18px 20px;
-    display: flex;
-    gap: 16px;
-    align-items: flex-start;
+    border-radius: 8px;
+    padding: 14px 16px;
     transition: border-color 0.15s;
   }
-
-  .step-card:hover { border-color: var(--accent); }
-
+  .step-item:hover { border-color: #334155; }
   .step-num {
-    width: 36px; height: 36px;
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 15px;
-    font-weight: 800;
-    flex-shrink: 0;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--border);
+    min-width: 28px;
+    padding-top: 1px;
   }
-
-  .step-num-1 { background: rgba(239,68,68,0.15); color: #f87171; border: 1px solid rgba(239,68,68,0.3); }
-  .step-num-2 { background: rgba(239,68,68,0.12); color: #fca5a5; border: 1px solid rgba(239,68,68,0.25); }
-  .step-num-3 { background: rgba(239,68,68,0.10); color: #fca5a5; border: 1px solid rgba(239,68,68,0.2); }
-  .step-num-4 { background: rgba(249,115,22,0.15); color: #fb923c; border: 1px solid rgba(249,115,22,0.3); }
-  .step-num-5 { background: rgba(249,115,22,0.12); color: #fdba74; border: 1px solid rgba(249,115,22,0.25); }
-  .step-num-6 { background: rgba(249,115,22,0.10); color: #fdba74; border: 1px solid rgba(249,115,22,0.2); }
-
   .step-content {}
-
   .step-title {
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 5px;
-  }
-
-  .step-desc {
+    font-weight: 600;
     font-size: 13px;
-    color: var(--muted2);
-    line-height: 1.6;
+    color: var(--text-primary);
+    margin-bottom: 4px;
   }
-
-  /* Overview panel */
-  .overview-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 16px;
-    margin-bottom: 32px;
+  .step-body {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.5;
   }
+  .step-item.p1 { border-left: 3px solid var(--high); }
+  .step-item.p2 { border-left: 3px solid var(--medium); }
+  .step-item.p3 { border-left: 3px solid var(--accent-blue); }
 
-  .overview-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px;
-  }
-
-  .ov-header {
+  /* Section header */
+  .section-hdr {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-bottom: 14px;
-  }
-
-  .ov-icon { font-size: 20px; }
-
-  .ov-label {
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--muted2);
-  }
-
-  .ov-items { list-style: none; }
-
-  .ov-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 0;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
     border-bottom: 1px solid var(--border);
-    font-size: 12.5px;
-    color: var(--muted2);
   }
-
-  .ov-item:last-child { border-bottom: none; }
-
-  .ov-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
-
-  .deadline-urgency {
-    background: rgba(239,68,68,0.08);
-    border: 1px solid rgba(239,68,68,0.2);
+  .section-icon { font-size: 20px; }
+  .section-title { font-size: 16px; font-weight: 600; color: var(--text-primary); }
+  .section-count {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    padding: 2px 8px;
     border-radius: 10px;
-    padding: 18px 20px;
-    margin-bottom: 32px;
+    margin-left: auto;
   }
-
-  .urgency-title {
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: #f87171;
-    margin-bottom: 14px;
-    font-family: 'JetBrains Mono', monospace;
-  }
-
-  .deadline-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 8px 0;
-    border-bottom: 1px solid rgba(239,68,68,0.12);
-    font-size: 13px;
-  }
-
-  .deadline-row:last-child { border-bottom: none; }
-
-  .deadline-date {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    color: #f87171;
-    min-width: 90px;
-    font-weight: 500;
-  }
-
-  .deadline-item { color: var(--text); font-weight: 600; }
-
-  .deadline-sub { color: var(--muted2); font-size: 12px; margin-left: auto; }
 
   /* Footer */
   .footer {
-    text-align: center;
-    padding: 24px 48px;
+    margin-top: 40px;
+    padding: 16px 32px;
     border-top: 1px solid var(--border);
-    font-size: 12px;
-    color: var(--muted);
-    font-family: 'JetBrains Mono', monospace;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .footer-text {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
   }
 
-  /* Responsive */
-  @media (max-width: 768px) {
-    .header, .main, .nav, .summary-bar { padding-left: 20px; padding-right: 20px; }
-    .briefing-title { font-size: 24px; }
-    .card-header { flex-direction: column; }
+  @media (max-width: 640px) {
+    .header, .nav-wrap, .main { padding-left: 16px; padding-right: 16px; }
+    .cards-grid { grid-template-columns: 1fr; }
+    .header-meta { align-items: flex-start; }
   }
 </style>
 </head>
@@ -479,739 +391,582 @@
 <div class="header">
   <div class="header-top">
     <div class="brand">
-      <div class="logo-box">TR</div>
-      <div class="brand-text">Tech River · MSP Intelligence</div>
+      <div class="brand-name">Tech River MSP · M365 Intelligence</div>
+      <div class="brief-title">Microsoft 365 Weekly Briefing</div>
     </div>
     <div class="header-meta">
-      Generated: March 30, 2026<br>
-      Sources: M365 Roadmap · Message Center<br>
-      Audience: Internal — Tech River Team
+      <div class="date-badge">Week of April 6, 2026</div>
+      <div class="date-badge">Sources: Roadmap · Message Center · March/April 2026</div>
     </div>
   </div>
-  <div class="briefing-title">Microsoft 365 <span>Weekly Briefing</span></div>
-  <div class="subtitle">Covering the week of March 30, 2026 — 24 items across 6 categories</div>
+  <div class="stats-row">
+    <div class="stat-chip"><span class="dot dot-red"></span><span class="stat-num">8</span> High Priority</div>
+    <div class="stat-chip"><span class="dot dot-amber"></span><span class="stat-num">7</span> Medium Priority</div>
+    <div class="stat-chip"><span class="dot dot-green"></span><span class="stat-num">8</span> Low Priority</div>
+    <div class="stat-chip">🚨 <span class="stat-num">2</span> Action Due This Week</div>
+    <div class="stat-chip">⏳ <span class="stat-num">4</span> Upcoming Deadlines</div>
+  </div>
 </div>
 
-<div class="summary-bar">
-  <div class="summary-item"><div class="summary-dot" style="background:#ef4444"></div> 5 High Priority</div>
-  <div class="summary-item"><div class="summary-dot" style="background:#f97316"></div> 8 Medium Priority</div>
-  <div class="summary-item"><div class="summary-dot" style="background:#22c55e"></div> 11 Low Priority</div>
-  <div class="summary-item"><div class="summary-dot" style="background:#3b82f6"></div> 4 Hard Deadlines</div>
-  <div class="summary-item"><div class="summary-dot" style="background:#a855f7"></div> 5 Retirements</div>
-</div>
-
-<div class="nav">
-  <button class="tab-btn active" onclick="switchTab('overview')">📋 Overview</button>
-  <button class="tab-btn" onclick="switchTab('action')">⚠️ Action Required</button>
-  <button class="tab-btn" onclick="switchTab('security')">🛡️ Security</button>
-  <button class="tab-btn" onclick="switchTab('copilot')">🤖 Copilot & AI</button>
-  <button class="tab-btn" onclick="switchTab('teams')">👥 Teams</button>
-  <button class="tab-btn" onclick="switchTab('sharepoint')">📁 SharePoint</button>
-  <button class="tab-btn" onclick="switchTab('retirements')">🗑️ Retirements</button>
-  <button class="tab-btn" onclick="switchTab('nextsteps')">✅ Next Steps</button>
+<div class="nav-wrap">
+  <ul class="nav-tabs" id="tabs">
+    <li><button class="active" onclick="showTab('action')">⚠️ Action Required</button></li>
+    <li><button onclick="showTab('security')">🛡️ Security &amp; Compliance</button></li>
+    <li><button onclick="showTab('copilot')">🤖 Copilot &amp; AI</button></li>
+    <li><button onclick="showTab('teams')">👥 Teams &amp; Collab</button></li>
+    <li><button onclick="showTab('sharepoint')">📁 SharePoint</button></li>
+    <li><button onclick="showTab('retirements')">🗑️ Retirements</button></li>
+    <li><button onclick="showTab('nextsteps')">✅ Next Steps</button></li>
+  </ul>
 </div>
 
 <div class="main">
 
-  <!-- OVERVIEW -->
-  <div id="tab-overview" class="tab-panel active">
-    <div class="deadline-urgency">
-      <div class="urgency-title">🚨 Upcoming Hard Deadlines — Action Required Now</div>
-      <div class="deadline-row">
-        <div class="deadline-date">May 15, 2026</div>
-        <div class="deadline-item">Teams Web Browser Enforcement (ECMAScript 2022)</div>
-        <div class="deadline-sub">Block — no grace period</div>
-      </div>
-      <div class="deadline-row">
-        <div class="deadline-date">May 2026</div>
-        <div class="deadline-item">SharePoint OTP → Entra B2B transition begins</div>
-        <div class="deadline-sub">New invites switch; OTP retires July</div>
-      </div>
-      <div class="deadline-row">
-        <div class="deadline-date">Jun 1, 2026</div>
-        <div class="deadline-item">Legacy Teams Phone Device Retirement</div>
-        <div class="deadline-sub">No fallback — hardware replacement only</div>
-      </div>
-      <div class="deadline-row">
-        <div class="deadline-date">Jul 1, 2026</div>
-        <div class="deadline-item">M365 Pricing Increase (all commercial SKUs)</div>
-        <div class="deadline-sub">Renew before this date to lock current pricing</div>
-      </div>
-      <div class="deadline-row">
-        <div class="deadline-date">Jul 14, 2026</div>
-        <div class="deadline-item">InfoPath 2013 + Forms Services — Hard Retirement</div>
-        <div class="deadline-sub">No extension available; no migration tool provided</div>
-      </div>
-    </div>
-
-    <div class="overview-grid">
-      <div class="overview-card">
-        <div class="ov-header"><div class="ov-icon">⚠️</div><div class="ov-label">Action Required</div></div>
-        <ul class="ov-items">
-          <li class="ov-item"><div class="ov-dot" style="background:#ef4444"></div>Teams Web Browser Compliance (May 15)</li>
-          <li class="ov-item"><div class="ov-dot" style="background:#ef4444"></div>Teams Phone Device Retirement (Jun 1)</li>
-          <li class="ov-item"><div class="ov-dot" style="background:#ef4444"></div>M365 Pricing — Renewal Planning (Jul 1)</li>
-          <li class="ov-item"><div class="ov-dot" style="background:#f97316"></div>SharePoint OTP → Entra B2B (May 2026)</li>
-        </ul>
-      </div>
-      <div class="overview-card">
-        <div class="ov-header"><div class="ov-icon">🛡️</div><div class="ov-label">Security Highlights</div></div>
-        <ul class="ov-items">
-          <li class="ov-item"><div class="ov-dot" style="background:#f97316"></div>Purview DLP + Palo Alto Prisma integration</li>
-          <li class="ov-item"><div class="ov-dot" style="background:#f97316"></div>Teams Suspicious Call Reporting (Apr 15)</li>
-          <li class="ov-item"><div class="ov-dot" style="background:#f97316"></div>DLP data enriched in Defender Graph API</li>
-          <li class="ov-item"><div class="ov-dot" style="background:#eab308"></div>IRM expanded to AI agents (Apr 2026)</li>
-        </ul>
-      </div>
-      <div class="overview-card">
-        <div class="ov-header"><div class="ov-icon">🤖</div><div class="ov-label">Copilot & AI</div></div>
-        <ul class="ov-items">
-          <li class="ov-item"><div class="ov-dot" style="background:#22c55e"></div>Copilot Chat in shared/delegate mailboxes</li>
-          <li class="ov-item"><div class="ov-dot" style="background:#22c55e"></div>AI watermarking policy for video/audio</li>
-          <li class="ov-item"><div class="ov-dot" style="background:#22c55e"></div>3rd-party model assignment (Apr 2026)</li>
-          <li class="ov-item"><div class="ov-dot" style="background:#22c55e"></div>M365 E7 launches May 1 ($99/user)</li>
-        </ul>
-      </div>
-      <div class="overview-card">
-        <div class="ov-header"><div class="ov-icon">🗑️</div><div class="ov-label">Retirements Tracking</div></div>
-        <ul class="ov-items">
-          <li class="ov-item"><div class="ov-dot" style="background:#ef4444"></div>InfoPath — Jul 14, 2026 (hard stop)</li>
-          <li class="ov-item"><div class="ov-dot" style="background:#f97316"></div>Teams Live Events — Feb 2027</li>
-          <li class="ov-item"><div class="ov-dot" style="background:#f97316"></div>Classic SharePoint Alerts — Jul 2026</li>
-          <li class="ov-item"><div class="ov-dot" style="background:#f97316"></div>Entra Connect Sync &lt;2.5.79.0 — Sep 2026</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
   <!-- ACTION REQUIRED -->
-  <div id="tab-action" class="tab-panel">
-    <div class="section-header">
-      <div class="section-icon">⚠️</div>
-      <div class="section-title">Action Required / Deadlines</div>
-      <div class="section-count">4 items</div>
+  <div id="section-action" class="section active">
+    <div class="section-hdr">
+      <span class="section-icon">⚠️</span>
+      <span class="section-title">Action Required / Deadlines</span>
+      <span class="section-count">5 items</span>
     </div>
-    <div class="cards">
+    <div class="cards-grid">
 
-      <div class="card priority-high">
-        <div class="card-left-bar"></div>
+      <div class="card urgent">
+        <div class="card-accent high"></div>
         <div class="card-header">
-          <div class="card-title">Teams on the Web — Browser Compliance Enforcement</div>
-          <div class="badges">
-            <span class="badge badge-high">HIGH</span>
+          <div class="card-title">Semi-Annual Enterprise Channel Retirement — Unmanaged Devices</div>
+          <div class="badge-row">
+            <span class="badge badge-high">High</span>
+            <span class="badge badge-admin">Admin</span>
+          </div>
+        </div>
+        <div class="card-date">⏰ <span>April 6–11, 2026 — THIS WEEK</span></div>
+        <div class="card-body">Microsoft is removing the Semi-Annual Enterprise Channel option for unmanaged devices in the M365 Apps admin center. Once removed, if an admin changes a device's channel, they cannot reselect Semi-Annual. Existing devices on this channel are not impacted.</div>
+        <div class="card-action">Audit all client tenants using Semi-Annual Enterprise Channel for unmanaged devices before April 11. Lock in any desired settings now — the option disappears after this window.</div>
+      </div>
+
+      <div class="card urgent">
+        <div class="card-accent high"></div>
+        <div class="card-header">
+          <div class="card-title">SharePoint/OneDrive IDCRL Legacy Auth — Hard Deadline</div>
+          <div class="badge-row">
+            <span class="badge badge-high">High</span>
             <span class="badge badge-both">Both</span>
           </div>
         </div>
-        <div class="card-meta">
-          <div class="meta-item"><span class="meta-icon">📅</span>Deadline: May 15, 2026</div>
-          <div class="meta-item"><span class="meta-icon">🔖</span>MC1230888</div>
-        </div>
-        <div class="card-desc">Starting May 15, 2026, Microsoft Teams on the web will only support browsers compliant with ECMAScript 2022. Users on non-compliant browsers will be blocked entirely — not degraded — after the enforcement date. Teams desktop and mobile clients are not affected.</div>
-        <div class="card-action">
-          <div class="card-action-label">Tech River Action</div>
-          <div class="card-action-text">Audit browser versions via NinjaRMM across all managed clients. Identify any users hitting Teams via web (especially BYOD). Push browser update policies now. Direct heavily browser-dependent users to the Teams desktop client as a resilient alternative. Send proactive user communication before May 1.</div>
-        </div>
+        <div class="card-date">⏰ <span>May 1, 2026 — Extension expires April 30</span></div>
+        <div class="card-body">IDCRL legacy SharePoint/OneDrive authentication is permanently retired May 1. After this date it cannot be re-enabled. Anything using stored username/password credentials — PowerShell scripts, Power BI refreshes, Power Automate flows, third-party tools — will break silently.</div>
+        <div class="card-action">Sweep all client tenants for IDCRL-dependent scripts, flows, and tools. Migrate to OAuth/modern auth now. Any client using the temporary PowerShell extension has until April 30.</div>
       </div>
 
-      <div class="card priority-high">
-        <div class="card-left-bar"></div>
+      <div class="card">
+        <div class="card-accent high"></div>
         <div class="card-header">
-          <div class="card-title">Legacy Teams Phone Device Retirement</div>
-          <div class="badges">
-            <span class="badge badge-high">HIGH</span>
+          <div class="card-title">M365 Pricing Increases — July 1, 2026</div>
+          <div class="badge-row">
+            <span class="badge badge-high">High</span>
+            <span class="badge badge-admin">MSP</span>
+          </div>
+        </div>
+        <div class="card-date">📅 <span>July 1, 2026 — Communicate Now</span></div>
+        <div class="card-body">Business Basic: $6→$7 (+16.7%) · Business Standard: $12.50→$14 (+12%) · Office 365 E3: $23→$26 (+13%) · M365 E3: $36→$39 (+8.3%) · M365 E5: $57→$60 (+5.3%)<br><br><strong style="color:#6ee7b7">Business Premium: Unchanged at $22/user/mo ✓</strong></div>
+        <div class="card-action">Build per-client pricing impact summaries. Business Premium's unchanged price makes the Standard→Premium upsell conversation compelling now. Clients renewing before July 1 lock in current pricing.</div>
+      </div>
+
+      <div class="card urgent">
+        <div class="card-accent high"></div>
+        <div class="card-header">
+          <div class="card-title">Teams Web Browser Enforcement</div>
+          <div class="badge-row">
+            <span class="badge badge-high">High</span>
             <span class="badge badge-both">Both</span>
           </div>
         </div>
-        <div class="card-meta">
-          <div class="meta-item"><span class="meta-icon">📅</span>Deadline: June 1, 2026</div>
-          <div class="meta-item"><span class="meta-icon">🔖</span>MC1229952</div>
-        </div>
-        <div class="card-desc">Certain legacy Teams Phone devices (specific Poly Trio, Yealink, and Crestron models) will be retired June 1, 2026. Affected devices cannot sign in or make/receive calls after that date. There is no software fix — physical hardware replacement is the only path forward.</div>
-        <div class="card-action">
-          <div class="card-action-label">Tech River Action</div>
-          <div class="card-action-text">Cross-reference MC1229952's device list against all client hardware inventories in Ninja/Hudu immediately. Any match requires active procurement planning now — hardware lead times can consume your runway. Loop in account managers to set client budget expectations.</div>
-        </div>
+        <div class="card-date">⏰ <span>May 15, 2026 — Access blocked after this date</span></div>
+        <div class="card-body">Teams on web will require ECMAScript 2022 (ES2022) browser support. Users on unsupported/old browsers will see warning banners until May 14, then lose access on May 15. Desktop and mobile clients are unaffected.</div>
+        <div class="card-action">Identify clients with locked-down browser environments or legacy browser GPOs. Communicate to end users proactively — this will generate helpdesk tickets if caught off guard.</div>
       </div>
 
-      <div class="card priority-high">
-        <div class="card-left-bar"></div>
+      <div class="card">
+        <div class="card-accent high"></div>
         <div class="card-header">
-          <div class="card-title">Microsoft 365 Pricing Increase — All Commercial SKUs</div>
-          <div class="badges">
-            <span class="badge badge-high">HIGH</span>
-            <span class="badge badge-admin">MSP/Admin</span>
-          </div>
-        </div>
-        <div class="card-meta">
-          <div class="meta-item"><span class="meta-icon">📅</span>Effective: July 1, 2026</div>
-          <div class="meta-item"><span class="meta-icon">🔖</span>Partner Center / Microsoft Blog</div>
-        </div>
-        <div class="card-desc">All major M365 commercial SKUs are increasing July 1, 2026. F1: $2.25→$3, F3: $8→$10, E3: +$3/user/month, E5: $57→$60. Business Basic, Standard, and Premium are also affected. Customers renewing before July 1 can lock in current pricing until their next renewal.</div>
-        <div class="card-action">
-          <div class="card-action-label">Tech River Action</div>
-          <div class="card-action-text">Pull all client renewal dates against the July 1 cutoff. Start proactive renewal conversations now, especially for Business Premium and E3 clients. Frame around value-adds (Defender for Office P1, Intune capabilities now bundled). This is an active upsell opportunity, not just a cost warning.</div>
-        </div>
-      </div>
-
-      <div class="card priority-medium">
-        <div class="card-left-bar"></div>
-        <div class="card-header">
-          <div class="card-title">SharePoint OTP Authentication Retirement → Entra B2B</div>
-          <div class="badges">
-            <span class="badge badge-medium">MEDIUM-HIGH</span>
+          <div class="card-title">SharePoint OTP External Sharing → Entra B2B</div>
+          <div class="badge-row">
+            <span class="badge badge-high">High</span>
             <span class="badge badge-both">Both</span>
           </div>
         </div>
-        <div class="card-meta">
-          <div class="meta-item"><span class="meta-icon">📅</span>Transition: May 2026 | Retirement: Jul–Aug 2026</div>
-          <div class="meta-item"><span class="meta-icon">🔖</span>MC1243549</div>
-        </div>
-        <div class="card-desc">Microsoft is retiring SharePoint One-Time Passcode (OTP) authentication for external file sharing. Beginning May 2026, new invitations will use Entra B2B. Starting July 2026, external users without a B2B guest account will be denied access on previously shared links.</div>
-        <div class="card-action">
-          <div class="card-action-label">Tech River Action</div>
-          <div class="card-action-text">For any client sharing SharePoint/OneDrive externally (vendors, accountants, clients), review external sharing reports in the SharePoint Admin Center. Identify OTP-authenticated external users. Ensure Entra B2B email OTP is not disabled. Proactively communicate the change — this will generate helpdesk tickets if ignored.</div>
-        </div>
+        <div class="card-date">📅 <span>July 2026 — Plan Now</span></div>
+        <div class="card-body">SharePoint One-Time Passcode (OTP) authentication for external sharing is being retired. External users without a corresponding Entra B2B guest account will get "Access Denied." Existing "specific people" links may fail for users without guest accounts.</div>
+        <div class="card-action">Audit external sharing configurations across all client tenants. Identify active OTP-based vendor/partner sharing. Start Entra B2B guest account migration — this is a P1 incident waiting to happen if ignored.</div>
       </div>
 
     </div>
   </div>
 
   <!-- SECURITY -->
-  <div id="tab-security" class="tab-panel">
-    <div class="section-header">
-      <div class="section-icon">🛡️</div>
-      <div class="section-title">Security & Compliance</div>
-      <div class="section-count">4 items</div>
+  <div id="section-security" class="section">
+    <div class="section-hdr">
+      <span class="section-icon">🛡️</span>
+      <span class="section-title">Security &amp; Compliance</span>
+      <span class="section-count">5 items</span>
     </div>
-    <div class="cards">
+    <div class="cards-grid">
 
-      <div class="card priority-medium">
-        <div class="card-left-bar"></div>
+      <div class="card urgent">
+        <div class="card-accent high"></div>
         <div class="card-header">
-          <div class="card-title">Teams — Report a Suspicious Call Feature</div>
-          <div class="badges">
-            <span class="badge badge-medium">MEDIUM</span>
+          <div class="card-title">Purview Endpoint DLP — Always-On Diagnostics Opt-Out Window Closing</div>
+          <div class="badge-row">
+            <span class="badge badge-high">High</span>
+            <span class="badge badge-admin">Admin</span>
+          </div>
+        </div>
+        <div class="card-date">⏰ <span>Second week of April 2026 — opt-out window closes</span></div>
+        <div class="card-body">Always-on diagnostics for Endpoint DLP will be enabled by default this week. Data includes policy evaluations, file classifications, enforcement actions — stored locally for 90 days. After the window, admins can still opt out at any time, but the default will be on.</div>
+        <div class="card-action">Decide now per client tenant whether to opt out or accept the default. For most Business Premium clients with active DLP, leave it on — improves troubleshooting. Document the decision in Hudu.</div>
+      </div>
+
+      <div class="card">
+        <div class="card-accent medium"></div>
+        <div class="card-header">
+          <div class="card-title">Teams Suspicious Message Reporting Expanded to Defender P1</div>
+          <div class="badge-row">
+            <span class="badge badge-medium">Medium</span>
             <span class="badge badge-both">Both</span>
           </div>
         </div>
-        <div class="card-meta">
-          <div class="meta-item"><span class="meta-icon">📅</span>Rollout: April 15–30, 2026</div>
-          <div class="meta-item"><span class="meta-icon">🔖</span>MC1223828</div>
-        </div>
-        <div class="card-desc">Teams users can flag suspicious one-to-one calls directly within the app. Reports surface in both the Microsoft Defender portal and Teams Admin Center, giving security teams actionable intelligence to investigate phone-based fraud and social engineering attempts. Admin configuration in the Defender portal is required to enable enhanced reporting.</div>
-        <div class="card-action">
-          <div class="card-action-label">Tech River Action</div>
-          <div class="card-action-text">Pre-configure the Defender portal setting before April 15. Communicate this feature to clients — especially finance, HR, and executive admin users who are most targeted by vishing attacks. Update security awareness training to explain when and how to use the feature.</div>
-        </div>
+        <div class="card-date">📅 <span>Early–Late April 2026</span></div>
+        <div class="card-body">Users can now report suspicious Teams messages (phishing, malware, spam) from chats, channels, and meeting chats. Previously required Defender P2 — now extended to Defender for Office 365 Plan 1, which is included in Business Premium.</div>
+        <div class="card-action">Validate availability in Defender portal under Protection Reports → User-reported security submissions once rolled out. Include in security QBR talking points for Business Premium clients.</div>
       </div>
 
-      <div class="card priority-medium">
-        <div class="card-left-bar"></div>
+      <div class="card">
+        <div class="card-accent medium"></div>
         <div class="card-header">
-          <div class="card-title">Purview DLP — Enrich Defender Alerts with DLP Event Data (Graph API)</div>
-          <div class="badges">
-            <span class="badge badge-medium">MEDIUM</span>
-            <span class="badge badge-admin">MSP/Admin</span>
+          <div class="card-title">Teams External Domain Anomalies Report — New in TAC</div>
+          <div class="badge-row">
+            <span class="badge badge-medium">Medium</span>
+            <span class="badge badge-admin">Admin</span>
           </div>
         </div>
-        <div class="card-meta">
-          <div class="meta-item"><span class="meta-icon">📅</span>Rolling out: March 2026</div>
-          <div class="meta-item"><span class="meta-icon">🔖</span>Roadmap 558681</div>
-        </div>
-        <div class="card-desc">The Graph API is being enriched with DLP rule match event data, making it easier for customers to correlate DLP alerts with Defender signals, integrate with SIEM tools, create automated workflows, and generate customizable compliance reports.</div>
-        <div class="card-action">
-          <div class="card-action-label">Tech River Action</div>
-          <div class="card-action-text">Relevant for any future automation work around DLP-to-SIEM correlation. File for roadmap tracking — this simplifies building automated compliance reporting pipelines. No immediate action required.</div>
-        </div>
+        <div class="card-date">📅 <span>Mid–Late April 2026</span></div>
+        <div class="card-body">A new report in Teams Admin Center under Protection Reports shows cross-tenant communication patterns and flags sudden spikes or abnormal external engagement activity. Supports proactive BEC investigation and external collaboration oversight.</div>
+        <div class="card-action">Add to routine TAC security review checklist. Integrate anomaly alerts into SIEM correlation workflows for elevated-risk clients.</div>
       </div>
 
-      <div class="card priority-medium">
-        <div class="card-left-bar"></div>
+      <div class="card">
+        <div class="card-accent medium"></div>
         <div class="card-header">
-          <div class="card-title">Purview DLP — Palo Alto Prisma Access Integration</div>
-          <div class="badges">
-            <span class="badge badge-medium">MEDIUM</span>
-            <span class="badge badge-admin">MSP/Admin</span>
+          <div class="card-title">Defender for iOS — iOS 16 End of Support</div>
+          <div class="badge-row">
+            <span class="badge badge-medium">Medium</span>
+            <span class="badge badge-both">Both</span>
           </div>
         </div>
-        <div class="card-meta">
-          <div class="meta-item"><span class="meta-icon">📅</span>Rolling out: March 2026</div>
-          <div class="meta-item"><span class="meta-icon">🔖</span>Roadmap 558939</div>
-        </div>
-        <div class="card-desc">Microsoft Purview network data security now integrates with Palo Alto Prisma Access, extending DLP policy enforcement to network traffic. Admins can apply the same classifiers, sensitive information types, and sensitivity labels used in other Purview policies to HTTP/HTTPS traffic from unmanaged cloud apps.</div>
-        <div class="card-action">
-          <div class="card-action-label">Tech River Action</div>
-          <div class="card-action-text">Low immediate relevance for most Tech River SMB clients — Prisma Access is enterprise/SASE-targeted. Awareness item for any larger E3/E5 clients with Palo Alto infrastructure. No action required.</div>
-        </div>
+        <div class="card-date">⏰ <span>April 30, 2026</span></div>
+        <div class="card-body">Microsoft Defender for iOS drops support for iOS 16 devices on April 30. These devices will no longer receive Defender updates, security patches, or support. New Defender for iOS installations also blocked on iOS 16 after this date.</div>
+        <div class="card-action">Pull iOS device version reports from Intune/Ninja across client tenants. Flag iOS 16 devices for upgrade to iOS 17+ or hardware replacement before coverage gap opens April 30.</div>
       </div>
 
-      <div class="card priority-low">
-        <div class="card-left-bar"></div>
+      <div class="card">
+        <div class="card-accent low"></div>
         <div class="card-header">
-          <div class="card-title">Purview IRM — Insider Risk Management Expanded to AI Agents</div>
-          <div class="badges">
-            <span class="badge badge-low">LOW-MEDIUM</span>
-            <span class="badge badge-admin">MSP/Admin</span>
+          <div class="card-title">Cross-Tenant Entra Security Group Sync — GA Late April</div>
+          <div class="badge-row">
+            <span class="badge badge-low">Low</span>
+            <span class="badge badge-admin">Admin</span>
           </div>
         </div>
-        <div class="card-meta">
-          <div class="meta-item"><span class="meta-icon">📅</span>Planned: April 2026</div>
-          <div class="meta-item"><span class="meta-icon">🔖</span>Roadmap 516032</div>
-        </div>
-        <div class="card-desc">Microsoft Purview Insider Risk Management is being extended to cover AI agent behavior, with specific risk indicators and insider risk scores built for agentic activities. Designed to detect data leakage, IP theft, or security violations from AI agent interactions.</div>
-        <div class="card-action">
-          <div class="card-action-label">Tech River Action</div>
-          <div class="card-action-text">Awareness item for now. As clients adopt Copilot agents, this becomes important for governance conversations. File for Q3 planning — revisit when agent usage becomes more prevalent across your client base.</div>
-        </div>
+        <div class="card-date">📅 <span>Late April 2026</span></div>
+        <div class="card-body">Cross-tenant synchronization in Microsoft Entra now supports security groups in addition to users. Enables centralized group management and cross-tenant access. Requires admin opt-in with configured attribute mappings and access policies.</div>
+        <div class="card-action">Low immediate impact for most SMB clients. Note for multi-entity clients or shared-services scenarios. Revisit during next licensing or identity architecture review.</div>
       </div>
 
     </div>
   </div>
 
   <!-- COPILOT -->
-  <div id="tab-copilot" class="tab-panel">
-    <div class="section-header">
-      <div class="section-icon">🤖</div>
-      <div class="section-title">Copilot & AI</div>
-      <div class="section-count">4 items</div>
+  <div id="section-copilot" class="section">
+    <div class="section-hdr">
+      <span class="section-icon">🤖</span>
+      <span class="section-title">Copilot &amp; AI</span>
+      <span class="section-count">4 items</span>
     </div>
-    <div class="cards">
+    <div class="cards-grid">
 
-      <div class="card priority-low">
-        <div class="card-left-bar"></div>
+      <div class="card">
+        <div class="card-accent medium"></div>
         <div class="card-header">
-          <div class="card-title">Copilot Chat — Available in Shared and Delegate Mailboxes</div>
-          <div class="badges">
-            <span class="badge badge-low">LOW</span>
-            <span class="badge badge-enduser">End Users</span>
+          <div class="card-title">Copilot Admin Controls — Authoritative Sources &amp; Web Domain Exclusions</div>
+          <div class="badge-row">
+            <span class="badge badge-medium">Medium</span>
+            <span class="badge badge-admin">Admin</span>
           </div>
         </div>
-        <div class="card-meta">
-          <div class="meta-item"><span class="meta-icon">📅</span>Rolling out: March 2026</div>
-          <div class="meta-item"><span class="meta-icon">🔖</span>Roadmap 554936</div>
-          <div class="meta-item"><span class="meta-icon">💡</span>Copilot license required</div>
-        </div>
-        <div class="card-desc">Copilot Chat is coming to shared and delegate mailboxes in the new Outlook for web. Users with full access to a shared or delegate mailbox can now use Copilot Chat within that context — enabling AI-assisted summarization, drafting, and Q&A for collaborative inbox management.</div>
-        <div class="card-action">
-          <div class="card-action-label">Tech River Action</div>
-          <div class="card-action-text">Good Copilot adoption talking point. Inform clients with Copilot licenses who use shared mailboxes (info@, support@, finance@). No admin configuration needed — surface in Copilot adoption conversations.</div>
-        </div>
+        <div class="card-date">📅 <span>April 2026 — Rolling out now</span></div>
+        <div class="card-body">Admins can now designate SharePoint sites as authoritative sources for Copilot Search, improving result relevance. Separately, domain exclusion for web grounding lets admins block specific external sites from being referenced in Copilot responses — useful for compliance and content governance.</div>
+        <div class="card-action">For Copilot-licensed clients, configure authoritative sources to boost intranet content relevance. Add both settings to Copilot onboarding checklist and governance documentation in Hudu.</div>
       </div>
 
-      <div class="card priority-low">
-        <div class="card-left-bar"></div>
+      <div class="card">
+        <div class="card-accent low"></div>
         <div class="card-header">
-          <div class="card-title">AI Watermarking Policy for Video/Audio Content</div>
-          <div class="badges">
-            <span class="badge badge-low">LOW</span>
-            <span class="badge badge-admin">MSP/Admin</span>
+          <div class="card-title">Copilot High-Usage User Insights — New Dashboard Category</div>
+          <div class="badge-row">
+            <span class="badge badge-low">Low</span>
+            <span class="badge badge-admin">Admin</span>
           </div>
         </div>
-        <div class="card-meta">
-          <div class="meta-item"><span class="meta-icon">📅</span>Rolled out: Feb 15–Mar 15, 2026</div>
-          <div class="meta-item"><span class="meta-icon">🔖</span>MC1221451</div>
-        </div>
-        <div class="card-desc">A new opt-in policy in the Cloud Policy service lets admins add visual or audio watermarks to video and audio content generated or altered by AI in Microsoft 365. Disabled by default. Images are out of scope for this release — a separate image watermarking option is planned.</div>
-        <div class="card-action">
-          <div class="card-action-label">Tech River Action</div>
-          <div class="card-action-text">Relevant for clients in regulated industries (legal, healthcare, financial) with AI content governance requirements. Review via Cloud Policy service. Most SMB clients can leave this off unless specific compliance mandates apply.</div>
-        </div>
+        <div class="card-date">📅 <span>Available now (March 2026)</span></div>
+        <div class="card-body">A new "High-usage users" category in the Copilot Dashboard surfaces individuals driving high consumption of pay-as-you-go Copilot services. Gives IT and finance early visibility into potential cost spikes before they become billing surprises.</div>
+        <div class="card-action">Check the Copilot Dashboard for any client tenants with PAYG Copilot services enabled. Good data point for MSP billing conversations and license optimization reviews.</div>
       </div>
 
-      <div class="card priority-low">
-        <div class="card-left-bar"></div>
+      <div class="card">
+        <div class="card-accent low"></div>
         <div class="card-header">
-          <div class="card-title">Third-Party AI Model Assignment in Copilot (Anthropic, xAI)</div>
-          <div class="badges">
-            <span class="badge badge-low">LOW-MEDIUM</span>
-            <span class="badge badge-admin">MSP/Admin</span>
+          <div class="card-title">PowerPoint Copilot Agent Mode — Rewrite, Translate &amp; Speaker Notes</div>
+          <div class="badge-row">
+            <span class="badge badge-low">Low</span>
+            <span class="badge badge-user">End Users</span>
           </div>
         </div>
-        <div class="card-meta">
-          <div class="meta-item"><span class="meta-icon">📅</span>Rollout: Late April 2026</div>
-          <div class="meta-item"><span class="meta-icon">🔖</span>Message Center · March 2026</div>
-        </div>
-        <div class="card-desc">Admins will be able to assign third-party AI model providers (Anthropic, xAI) to specific users or groups in Microsoft 365 Copilot via the Microsoft Admin Center. Entra ID group-based access management supported.</div>
-        <div class="card-action">
-          <div class="card-action-label">Tech River Action</div>
-          <div class="card-action-text">Awareness item. When this lands in late April, review the control in MAC for any Copilot-licensed clients. The direction here is that Copilot is becoming a model-agnostic AI gateway — useful framing for client Copilot conversations.</div>
-        </div>
+        <div class="card-date">📅 <span>Mid-March to Late April 2026</span></div>
+        <div class="card-body">Agent mode in PowerPoint Copilot is updated with rewrite, translate, and speaker notes generation capabilities. Requires M365 Copilot license (not included in Business Premium without add-on).</div>
+        <div class="card-action">No admin action needed. Include in end-user tips communication for Copilot-licensed clients. Good demonstration item for Copilot adoption conversations.</div>
       </div>
 
-      <div class="card priority-low">
-        <div class="card-left-bar"></div>
+      <div class="card">
+        <div class="card-accent low"></div>
         <div class="card-header">
-          <div class="card-title">Microsoft 365 E7 — New Premium AI Bundle GA</div>
-          <div class="badges">
-            <span class="badge badge-low">LOW (SMB context)</span>
-            <span class="badge badge-admin">MSP/Admin</span>
+          <div class="card-title">Video Recap for Teams Meetings via Copilot Chat</div>
+          <div class="badge-row">
+            <span class="badge badge-low">Low</span>
+            <span class="badge badge-user">End Users</span>
           </div>
         </div>
-        <div class="card-meta">
-          <div class="meta-item"><span class="meta-icon">📅</span>GA: May 1, 2026</div>
-          <div class="meta-item"><span class="meta-icon">💰</span>$99/user/month</div>
-        </div>
-        <div class="card-desc">Microsoft 365 E7 bundles M365 E5, Copilot, Entra Suite, and Agent 365 into a single enterprise plan. Positioned as the suite for "human-led, agent-operated" enterprises at $99/user/month. Primarily enterprise-targeted.</div>
-        <div class="card-action">
-          <div class="card-action-label">Tech River Action</div>
-          <div class="card-action-text">Not relevant for most Tech River SMB clients. Awareness for any E5 clients who ask. If a client is already at E5 + Copilot, this could be a consolidation conversation at renewal.</div>
-        </div>
+        <div class="card-date">📅 <span>Available now (March 2026)</span></div>
+        <div class="card-body">Copilot Chat meeting summaries now include a video recap — a narrated highlight reel combining written takeaways with short clips from the meeting. Available for meetings 10+ minutes long with recording enabled. Requires Copilot license.</div>
+        <div class="card-action">No admin action needed. Meeting recording must be enabled. Useful end-user adoption talking point for Copilot customers — cite this in user adoption communications.</div>
       </div>
 
     </div>
   </div>
 
   <!-- TEAMS -->
-  <div id="tab-teams" class="tab-panel">
-    <div class="section-header">
-      <div class="section-icon">👥</div>
-      <div class="section-title">Teams & Collaboration</div>
-      <div class="section-count">4 items</div>
+  <div id="section-teams" class="section">
+    <div class="section-hdr">
+      <span class="section-icon">👥</span>
+      <span class="section-title">Teams &amp; Collaboration</span>
+      <span class="section-count">5 items</span>
     </div>
-    <div class="cards">
+    <div class="cards-grid">
 
-      <div class="card priority-medium">
-        <div class="card-left-bar"></div>
+      <div class="card">
+        <div class="card-accent medium"></div>
         <div class="card-header">
-          <div class="card-title">Teams — Detection of External AI Meeting Assistant Bots</div>
-          <div class="badges">
-            <span class="badge badge-medium">MEDIUM</span>
+          <div class="card-title">Teams Phone Multi-Line — Up to 10 Numbers Per User</div>
+          <div class="badge-row">
+            <span class="badge badge-medium">Medium</span>
             <span class="badge badge-both">Both</span>
           </div>
         </div>
-        <div class="card-meta">
-          <div class="meta-item"><span class="meta-icon">📅</span>Rollout: Early–Mid June 2026</div>
-          <div class="meta-item"><span class="meta-icon">🔖</span>Roadmap · March 2026</div>
-        </div>
-        <div class="card-desc">Teams will automatically detect and flag external AI meeting assistant bots (e.g., Otter.ai, Fireflies) attempting to join meetings. Flagged bots appear in the lobby, giving organizers the ability to admit, deny, or remove them — giving organizations more governance over automated meeting participants.</div>
-        <div class="card-action">
-          <div class="card-action-label">Tech River Action</div>
-          <div class="card-action-text">Meaningful security/governance improvement for clients in regulated industries or those with sensitive meetings. Review Teams meeting lobby policies in TAC now. Communicate proactively to clients so users know what to expect when they see bot flags in the lobby.</div>
-        </div>
+        <div class="card-date">📅 <span>Late April 2026 — Admin config required</span></div>
+        <div class="card-body">Teams Phone users can now be assigned up to 10 telephone numbers, supporting scenarios like multi-region presence, multiple roles, or multiple business lines. Feature is off by default — admin must enable and configure. Requires Teams Phone license.</div>
+        <div class="card-action">MS-721 relevant. Review TAC configuration options once available. Proactively offer to Teams Phone clients with front-desk or multi-role users. Flag for your Teams Phone customer base in next QBR.</div>
       </div>
 
-      <div class="card priority-low">
-        <div class="card-left-bar"></div>
+      <div class="card">
+        <div class="card-accent medium"></div>
         <div class="card-header">
-          <div class="card-title">Teams — Video-Based Meeting Recaps</div>
-          <div class="badges">
-            <span class="badge badge-low">LOW-MEDIUM</span>
-            <span class="badge badge-enduser">End Users</span>
+          <div class="card-title">Teams Rooms/Device Management Moves to Pro Management Portal</div>
+          <div class="badge-row">
+            <span class="badge badge-medium">Medium</span>
+            <span class="badge badge-admin">Admin</span>
           </div>
         </div>
-        <div class="card-meta">
-          <div class="meta-item"><span class="meta-icon">📅</span>Rollout: Late April–Early May 2026</div>
-          <div class="meta-item"><span class="meta-icon">💡</span>Copilot license required</div>
-        </div>
-        <div class="card-desc">Teams adds video-based meeting recaps that combine short video clips with key AI-generated takeaways. Users can catch up on missed meetings more efficiently. Requires a Copilot license.</div>
-        <div class="card-action">
-          <div class="card-action-label">Tech River Action</div>
-          <div class="card-action-text">Good Copilot adoption touchpoint. When communicating to Copilot-licensed clients, include this as a practical example. Confirm Copilot licensing is in place before users look for the feature.</div>
-        </div>
+        <div class="card-date">📅 <span>April 2026 — Public Preview</span></div>
+        <div class="card-body">Management of Teams Rooms on Android, Teams phones, panels, and displays is transitioning from Teams Admin Center to the Pro Management Portal (PMP). Device inventory and health data auto-appears in PMP. Actions in TAC redirect to PMP.</div>
+        <div class="card-action">Bookmark the Pro Management Portal now if you manage Teams Rooms or shared devices. Update Hudu runbooks that reference TAC for device management to reflect the new PMP destination.</div>
       </div>
 
-      <div class="card priority-low">
-        <div class="card-left-bar"></div>
+      <div class="card">
+        <div class="card-accent medium"></div>
         <div class="card-header">
-          <div class="card-title">Teams Phone — Multi-Line Number Assignment</div>
-          <div class="badges">
-            <span class="badge badge-low">LOW</span>
+          <div class="card-title">Teams Licensing Update — Places &amp; Town Halls Now Included</div>
+          <div class="badge-row">
+            <span class="badge badge-medium">Medium</span>
             <span class="badge badge-both">Both</span>
           </div>
         </div>
-        <div class="card-meta">
-          <div class="meta-item"><span class="meta-icon">📅</span>Rollout: April 2026 (late Apr–mid May)</div>
-          <div class="meta-item"><span class="meta-icon">🔖</span>Roadmap 553590</div>
-        </div>
-        <div class="card-desc">Teams Phone will support multi-line functionality — up to 10 numbers per user account on a single device. Users can make and receive calls from any assigned number without switching accounts, useful for staff managing multiple roles or department lines.</div>
-        <div class="card-action">
-          <div class="card-action-label">Tech River Action</div>
-          <div class="card-action-text">Awareness item for clients with Teams Phone deployments. Useful for receptionists, dual-role staff, or branch office scenarios. Review telephony policies in TAC when this lands.</div>
-        </div>
+        <div class="card-date">📅 <span>Effective April 1, 2026 ✓</span></div>
+        <div class="card-body">Microsoft Places Explorer/Finder is now included in Teams/Outlook calendar licenses (E3/E5, Business Premium). Town halls with advanced features are available for all Teams Enterprise users — up to 3,000 interactive attendees (10,000 view-only). No add-on needed.</div>
+        <div class="card-action">Business Premium clients already have access. Highlight in client conversations for any who've asked about hybrid workplace or webinar hosting. Good proactive value-add talking point.</div>
       </div>
 
-      <div class="card priority-low">
-        <div class="card-left-bar"></div>
+      <div class="card">
+        <div class="card-accent low"></div>
         <div class="card-header">
-          <div class="card-title">Teams — Modernized Meeting Sharing Panel UI</div>
-          <div class="badges">
-            <span class="badge badge-low">LOW</span>
-            <span class="badge badge-enduser">End Users</span>
+          <div class="card-title">Teams Auto Work Location Detection via Wi-Fi</div>
+          <div class="badge-row">
+            <span class="badge badge-low">Low</span>
+            <span class="badge badge-both">Both</span>
           </div>
         </div>
-        <div class="card-meta">
-          <div class="meta-item"><span class="meta-icon">📅</span>Rolling out: March 2026</div>
-          <div class="meta-item"><span class="meta-icon">🔖</span>Roadmap 502520</div>
+        <div class="card-date">📅 <span>April 2026 — Off by default</span></div>
+        <div class="card-body">Teams can automatically update a user's work location based on their connected Wi-Fi network. Off by default — admin enables it, then users opt in. Useful for hybrid workplace presence tracking and Microsoft Places integration.</div>
+        <div class="card-action">No action needed unless clients request hybrid presence tracking. Off by default — consider enabling for clients with active Places/hybrid management initiatives.</div>
+      </div>
+
+      <div class="card">
+        <div class="card-accent low"></div>
+        <div class="card-header">
+          <div class="card-title">Teams Badge Count Update &amp; 'Catch Up' on Mobile</div>
+          <div class="badge-row">
+            <span class="badge badge-low">Low</span>
+            <span class="badge badge-user">End Users</span>
+          </div>
         </div>
-        <div class="card-desc">The sharing panel in Teams meetings has been modernized with a cleaner UI that simplifies window sharing and improves discoverability for other sharing options, including easier file sharing during meetings.</div>
-        <div class="card-action">
-          <div class="card-action-label">Tech River Action</div>
-          <div class="card-action-text">No admin action required. May generate brief "where did the share button go?" tickets. Consider a short proactive user communication or update internal training materials showing the new layout.</div>
-        </div>
+        <div class="card-date">📅 <span>Mid-April (badges) / Early May (Catch Up) 2026</span></div>
+        <div class="card-body">Badge counts updated to show unread/unmuted chats, mentions, followed threads, and tag mentions with clearer visual indicators. A new 'Catch up' view on mobile consolidates conversations needing attention for easier triage.</div>
+        <div class="card-action">Helpdesk heads-up: clients may call about changed badge numbers. Ready answer: "Microsoft updated how Teams counts unread messages — it's more accurate now, not a bug."</div>
       </div>
 
     </div>
   </div>
 
   <!-- SHAREPOINT -->
-  <div id="tab-sharepoint" class="tab-panel">
-    <div class="section-header">
-      <div class="section-icon">📁</div>
-      <div class="section-title">SharePoint, OneDrive & Viva</div>
-      <div class="section-count">3 items</div>
+  <div id="section-sharepoint" class="section">
+    <div class="section-hdr">
+      <span class="section-icon">📁</span>
+      <span class="section-title">SharePoint &amp; OneDrive</span>
+      <span class="section-count">4 items</span>
     </div>
-    <div class="cards">
+    <div class="cards-grid">
 
-      <div class="card priority-low">
-        <div class="card-left-bar"></div>
+      <div class="card urgent">
+        <div class="card-accent high"></div>
         <div class="card-header">
-          <div class="card-title">SharePoint — New Page Template Gallery (50+ Templates)</div>
-          <div class="badges">
-            <span class="badge badge-low">LOW</span>
-            <span class="badge badge-enduser">End Users</span>
+          <div class="card-title">SharePoint Legacy Compliance Features Retired — Now</div>
+          <div class="badge-row">
+            <span class="badge badge-high">High</span>
+            <span class="badge badge-admin">Admin</span>
           </div>
         </div>
-        <div class="card-meta">
-          <div class="meta-item"><span class="meta-icon">📅</span>Rolling out: March–April 2026</div>
-          <div class="meta-item"><span class="meta-icon">🔖</span>Roadmap 490565 / MC1240743</div>
-        </div>
-        <div class="card-desc">A new Template Gallery introduces a centralized hub with 50+ modern out-of-the-box SharePoint page templates — including status updates, event announcements, and team introductions. Improved browsing, filtering, and search. Enabled by default, no tenant changes required.</div>
-        <div class="card-action">
-          <div class="card-action-label">Tech River Action</div>
-          <div class="card-action-text">No admin action required. Good adoption communication for clients using SharePoint as an intranet. Highlight in any SharePoint comms to site owners/content managers.</div>
-        </div>
+        <div class="card-date">⏰ <span>April 2026 — In Progress</span></div>
+        <div class="card-body">SharePoint Online is retiring Information Management Policies, In-Place Records Management, document deletion-only policies, and site closure/deletion policies. These are being removed from the UI and backend services may stop functioning. API access also removed.</div>
+        <div class="card-action">Run the M365 Assessment Tool on any client tenants where SharePoint compliance features may have been configured. Migrate to Purview Data Lifecycle Management. This can silently break data governance workflows already in place.</div>
       </div>
 
-      <div class="card priority-low">
-        <div class="card-left-bar"></div>
+      <div class="card">
+        <div class="card-accent medium"></div>
         <div class="card-header">
-          <div class="card-title">SharePoint / OneDrive — Markdown File Editing in Browser</div>
-          <div class="badges">
-            <span class="badge badge-low">LOW</span>
-            <span class="badge badge-enduser">End Users</span>
+          <div class="card-title">Standalone SharePoint / OneDrive Plans — End of Sale Approaching</div>
+          <div class="badge-row">
+            <span class="badge badge-medium">Medium</span>
+            <span class="badge badge-admin">MSP</span>
           </div>
         </div>
-        <div class="card-meta">
-          <div class="meta-item"><span class="meta-icon">📅</span>Rollout: Mid-April–Late May 2026</div>
-          <div class="meta-item"><span class="meta-icon">🔖</span>T-Minus 365 March 2026</div>
-        </div>
-        <div class="card-desc">OneDrive and SharePoint will natively support viewing and editing Markdown (.md) files directly in the browser — no additional tools or downloads required.</div>
-        <div class="card-action">
-          <div class="card-action-label">Tech River Action</div>
-          <div class="card-action-text">No action required. Relevant for technical teams and documentation-focused clients. File as awareness — useful for any clients managing knowledge base or IT documentation in SharePoint.</div>
-        </div>
+        <div class="card-date">📅 <span>End of sale: May 31, 2026</span></div>
+        <div class="card-body">Standalone SharePoint Online and OneDrive for Business (Plan 1 and Plan 2) are being retired. No new purchases after May 31, 2026. Existing customers can renew until end-of-life in January 2027, with full service through December 2029.</div>
+        <div class="card-action">Check for any clients on standalone SPO/ODB plans — rare in your Business Premium-heavy base. Stop quoting these for new engagements immediately. Steer toward M365 suites for any new requirements.</div>
       </div>
 
-      <div class="card priority-low">
-        <div class="card-left-bar"></div>
+      <div class="card">
+        <div class="card-accent low"></div>
         <div class="card-header">
-          <div class="card-title">Copilot SharePoint List Agent</div>
-          <div class="badges">
-            <span class="badge badge-low">LOW</span>
-            <span class="badge badge-enduser">End Users</span>
+          <div class="card-title">SharePoint Document Library Filter Pane Refresh</div>
+          <div class="badge-row">
+            <span class="badge badge-low">Low</span>
+            <span class="badge badge-user">End Users</span>
           </div>
         </div>
-        <div class="card-meta">
-          <div class="meta-item"><span class="meta-icon">📅</span>Rolling out: March 2026</div>
-          <div class="meta-item"><span class="meta-icon">💡</span>Copilot license required</div>
-          <div class="meta-item"><span class="meta-icon">🔖</span>Roadmap · Mar 23 roundup</div>
+        <div class="card-date">📅 <span>May 2026</span></div>
+        <div class="card-body">SharePoint document libraries and lists are getting an updated filter pane with a new search box, eliminating the need to scroll through long filter lists. Enabled by default, no admin action needed.</div>
+        <div class="card-action">Helpdesk awareness item — users may notice the updated UI and ask about it. No configuration changes needed.</div>
+      </div>
+
+      <div class="card">
+        <div class="card-accent low"></div>
+        <div class="card-header">
+          <div class="card-title">Copilot Pages → SharePoint News Post Conversion</div>
+          <div class="badge-row">
+            <span class="badge badge-low">Low</span>
+            <span class="badge badge-user">End Users</span>
+          </div>
         </div>
-        <div class="card-desc">A new SharePoint List Agent enables Copilot users to create Microsoft Lists through natural language prompts — with intelligent schema generation and automatic setup. Makes structured data collection accessible to non-technical users.</div>
-        <div class="card-action">
-          <div class="card-action-label">Tech River Action</div>
-          <div class="card-action-text">Good practical Copilot adoption showcase for non-technical users. Highlight in client Copilot conversations as a "real world use case" for end users who interact with structured data regularly.</div>
-        </div>
+        <div class="card-date">📅 <span>Available now</span></div>
+        <div class="card-body">Users can now convert a Copilot Page directly into a SharePoint News post, streamlining the workflow from AI-assisted content creation to internal communications publishing. Requires Copilot license.</div>
+        <div class="card-action">No admin action needed. Good adoption talking point for clients using Copilot for internal comms workflows.</div>
       </div>
 
     </div>
   </div>
 
   <!-- RETIREMENTS -->
-  <div id="tab-retirements" class="tab-panel">
-    <div class="section-header">
-      <div class="section-icon">🗑️</div>
-      <div class="section-title">Retirements & Deprecations</div>
-      <div class="section-count">5 items</div>
+  <div id="section-retirements" class="section">
+    <div class="section-hdr">
+      <span class="section-icon">🗑️</span>
+      <span class="section-title">Retirements &amp; Deprecations</span>
+      <span class="section-count">11 items</span>
     </div>
-    <div class="cards">
-
-      <div class="card priority-high">
-        <div class="card-left-bar"></div>
-        <div class="card-header">
-          <div class="card-title">InfoPath 2013 + Forms Services in SharePoint Online</div>
-          <div class="badges">
-            <span class="badge badge-high">HIGH (if in use)</span>
-            <span class="badge badge-both">Both</span>
-          </div>
-        </div>
-        <div class="card-meta">
-          <div class="meta-item"><span class="meta-icon">📅</span>Hard Retirement: July 14, 2026</div>
-          <div class="meta-item"><span class="meta-icon">🔖</span>MC616550</div>
-          <div class="meta-item"><span class="meta-icon">⚠️</span>No extension · No migration tool</div>
-        </div>
-        <div class="card-desc">InfoPath 2013 client and InfoPath Forms Services in SharePoint Online will stop working on July 14, 2026. No option to extend, no automated migration tool provided. Forms must be manually migrated to Power Apps, Power Automate, or Microsoft Forms.</div>
-        <div class="card-action">
-          <div class="card-action-label">Tech River Action</div>
-          <div class="card-action-text">Run the Microsoft 365 Assessment Tool against every client tenant and check the classicinfopath.csv output for active usage. Any discovery = initiate an active migration project immediately. There is no tool, no extension, no fallback. July 14 is a hard stop.</div>
-        </div>
-      </div>
-
-      <div class="card priority-medium">
-        <div class="card-left-bar"></div>
-        <div class="card-header">
-          <div class="card-title">Teams Live Events Retirement</div>
-          <div class="badges">
-            <span class="badge badge-medium">MEDIUM</span>
-            <span class="badge badge-enduser">End Users</span>
-          </div>
-        </div>
-        <div class="card-meta">
-          <div class="meta-item"><span class="meta-icon">📅</span>Restrictions begin: Feb 2026 | Full Retirement: Feb 2027</div>
-          <div class="meta-item"><span class="meta-icon">🔖</span>MC1226495</div>
-        </div>
-        <div class="card-desc">Teams Live Events and associated Microsoft Graph APIs will be fully retired by February 2027. New Live Event scheduling is being restricted ahead of the retirement. Microsoft recommends migrating to Teams Town Halls as the successor for large-scale broadcast events.</div>
-        <div class="card-action">
-          <div class="card-action-label">Tech River Action</div>
-          <div class="card-action-text">Identify any clients using Live Events for all-hands meetings, webcasts, or external events. Begin transitioning to Town Halls now — don't wait for restrictions to force the change. Run a pilot Town Hall session so organizers are comfortable with the format difference.</div>
-        </div>
-      </div>
-
-      <div class="card priority-medium">
-        <div class="card-left-bar"></div>
-        <div class="card-header">
-          <div class="card-title">Classic SharePoint Alerts — Full Retirement</div>
-          <div class="badges">
-            <span class="badge badge-medium">MEDIUM</span>
-            <span class="badge badge-enduser">End Users</span>
-          </div>
-        </div>
-        <div class="card-meta">
-          <div class="meta-item"><span class="meta-icon">📅</span>Full Retirement: July 2026</div>
-        </div>
-        <div class="card-desc">Classic SharePoint alerts (document/list change notifications) are being fully retired by July 2026. Many users rely on alerts for tracking document changes and list updates. Modern alternatives include Power Automate notification flows, SharePoint rules, and Teams-based notifications.</div>
-        <div class="card-action">
-          <div class="card-action-label">Tech River Action</div>
-          <div class="card-action-text">Communicate to clients before this hits — lost alerts without warning will generate helpdesk tickets. Identify clients with active alert users and begin transitioning them to Power Automate notification flows now. Document the transition in Hudu for each affected tenant.</div>
-        </div>
-      </div>
-
-      <div class="card priority-medium">
-        <div class="card-left-bar"></div>
-        <div class="card-header">
-          <div class="card-title">Microsoft Entra Connect Sync — Versions &lt; 2.5.79.0</div>
-          <div class="badges">
-            <span class="badge badge-medium">MEDIUM</span>
-            <span class="badge badge-admin">MSP/Admin</span>
-          </div>
-        </div>
-        <div class="card-meta">
-          <div class="meta-item"><span class="meta-icon">📅</span>Retirement: September 30, 2026</div>
-        </div>
-        <div class="card-desc">Microsoft Entra Connect Sync versions earlier than 2.5.79.0 will stop synchronizing on September 30, 2026. Organizations on older versions must upgrade to 2.5.79.0 or later, or migrate to Microsoft Entra Cloud Sync.</div>
-        <div class="card-action">
-          <div class="card-action-label">Tech River Action</div>
-          <div class="card-action-text">Audit Entra Connect Sync versions across all hybrid clients now. Add version checks and upgrades to the next scheduled maintenance window. Any hybrid client on an unsupported version will silently break directory sync on September 30.</div>
-        </div>
-      </div>
-
-      <div class="card priority-low">
-        <div class="card-left-bar"></div>
-        <div class="card-header">
-          <div class="card-title">Outlook "Contact Masking" Feature Retired</div>
-          <div class="badges">
-            <span class="badge badge-low">LOW</span>
-            <span class="badge badge-enduser">End Users</span>
-          </div>
-        </div>
-        <div class="card-meta">
-          <div class="meta-item"><span class="meta-icon">📅</span>Retired: March 31, 2026</div>
-          <div class="meta-item"><span class="meta-icon">🔖</span>Outlook Roadmap</div>
-        </div>
-        <div class="card-desc">The Outlook "Contact Masking" feature (which hid suggested recipients in autocomplete) was retired March 31, 2026. Previously hidden contacts may now reappear in Outlook recipient suggestions. No replacement feature is provided.</div>
-        <div class="card-action">
-          <div class="card-action-label">Tech River Action</div>
-          <div class="card-action-text">No admin action required. Add to your helpdesk knowledge base so technicians can quickly explain to clients why hidden contacts are reappearing in Outlook suggestions. This may generate low-volume tickets.</div>
-        </div>
-      </div>
-
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Date</th>
+            <th>Priority</th>
+            <th>Impact &amp; Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="td-feature">SharePoint ACS (Azure Access Control Service)</td>
+            <td class="td-date">Apr 2, 2026 ✅</td>
+            <td><span class="badge badge-high">High</span></td>
+            <td class="td-notes">Already retired. Any legacy SP app registrations using ACS are broken now. Sweep tenant app registrations immediately.</td>
+          </tr>
+          <tr>
+            <td class="td-feature">SharePoint 2013 Workflows &amp; Add-Ins</td>
+            <td class="td-date">Apr 2, 2026 ✅</td>
+            <td><span class="badge badge-high">High</span></td>
+            <td class="td-notes">Already retired. SP 2013 workflows stop functioning. Migrate to Power Automate. Use M365 Assessment Tool to inventory.</td>
+          </tr>
+          <tr>
+            <td class="td-feature">Viva Engage Live Events (Teams Live Events)</td>
+            <td class="td-date">Apr 15, 2026</td>
+            <td><span class="badge badge-medium">Medium</span></td>
+            <td class="td-notes">No new events can be scheduled after this date. Migrate to Teams Town Halls. Existing events before retirement continue through Feb 2027.</td>
+          </tr>
+          <tr>
+            <td class="td-feature">IDCRL Legacy SharePoint/OneDrive Auth</td>
+            <td class="td-date">May 1, 2026</td>
+            <td><span class="badge badge-high">High</span></td>
+            <td class="td-notes">Extension via PowerShell expires April 30. Permanent block May 1. Scripts/flows/tools with stored credentials will fail. See Action Required section.</td>
+          </tr>
+          <tr>
+            <td class="td-feature">Defender for iOS on iOS 16</td>
+            <td class="td-date">Apr 30, 2026</td>
+            <td><span class="badge badge-medium">Medium</span></td>
+            <td class="td-notes">No updates, patches, or new installs after April 30. Identify and upgrade iOS 16 devices via Intune.</td>
+          </tr>
+          <tr>
+            <td class="td-feature">Teams Web — Legacy Browser Access</td>
+            <td class="td-date">May 15, 2026</td>
+            <td><span class="badge badge-high">High</span></td>
+            <td class="td-notes">Users on browsers without ES2022 support blocked from Teams web. Desktop/mobile unaffected. Audit browser environments.</td>
+          </tr>
+          <tr>
+            <td class="td-feature">Standalone SharePoint Online / OneDrive Plans</td>
+            <td class="td-date">May 31, 2026 (EOS)</td>
+            <td><span class="badge badge-medium">Medium</span></td>
+            <td class="td-notes">End of sale. No new purchases after May 31. Existing renewals allowed until Jan 2027. Service continues until Dec 2029.</td>
+          </tr>
+          <tr>
+            <td class="td-feature">InfoPath 2013 Client &amp; Forms Services in SharePoint Online</td>
+            <td class="td-date">Jul 14, 2026</td>
+            <td><span class="badge badge-high">High</span></td>
+            <td class="td-notes">Run M365 Assessment Tool to identify InfoPath usage. Migrate to Power Apps, Power Automate, or Microsoft Forms. Start now — complex migrations take time.</td>
+          </tr>
+          <tr>
+            <td class="td-feature">SharePoint OTP External Sharing → Entra B2B</td>
+            <td class="td-date">July 2026</td>
+            <td><span class="badge badge-high">High</span></td>
+            <td class="td-notes">External users without Entra guest accounts get Access Denied. Audit all external sharing and create B2B guest accounts proactively.</td>
+          </tr>
+          <tr>
+            <td class="td-feature">SharePoint Alerts</td>
+            <td class="td-date">July 2026</td>
+            <td><span class="badge badge-medium">Medium</span></td>
+            <td class="td-notes">Email notifications for SharePoint list/library changes fully retired. Migrate to Power Automate flows or SharePoint Rules.</td>
+          </tr>
+          <tr>
+            <td class="td-feature">Exchange Online PowerShell -Credential Parameter</td>
+            <td class="td-date">July 2026</td>
+            <td><span class="badge badge-medium">Medium</span></td>
+            <td class="td-notes">ROPC auth flow (no MFA support) deprecated. Update Exchange Online PowerShell scripts to use modern auth (certificate or managed identity).</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 
   <!-- NEXT STEPS -->
-  <div id="tab-nextsteps" class="tab-panel">
-    <div class="section-header">
-      <div class="section-icon">✅</div>
-      <div class="section-title">Recommended Next Steps This Week</div>
-      <div class="section-count">6 actions</div>
+  <div id="section-nextsteps" class="section">
+    <div class="section-hdr">
+      <span class="section-icon">✅</span>
+      <span class="section-title">Recommended Next Steps This Week</span>
+      <span class="section-count">6 items</span>
     </div>
-    <div class="steps-grid">
+    <div class="steps-list">
 
-      <div class="step-card">
-        <div class="step-num step-num-1">1</div>
+      <div class="step-item p1">
+        <div class="step-num">01</div>
         <div class="step-content">
-          <div class="step-title">Teams Phone Device Audit</div>
-          <div class="step-desc">Pull the MC1229952 affected device list and cross-check against all client hardware inventories in Ninja/Hudu. Flag any matches immediately for client outreach and procurement planning. Hardware lead times make this a June 1 deadline that needs to start today.</div>
+          <div class="step-title">🚨 IDCRL Legacy Auth Sweep — Before April 30</div>
+          <div class="step-body">Run a cross-tenant audit of all client Power BI datasets, Power Automate flows, PowerShell scripts, and third-party tools connecting to SharePoint/OneDrive. Any using stored credentials must be migrated to OAuth/modern auth before May 1 or will break silently. Extension window expires April 30 — no extension after that.</div>
         </div>
       </div>
 
-      <div class="step-card">
-        <div class="step-num step-num-2">2</div>
+      <div class="step-item p1">
+        <div class="step-num">02</div>
         <div class="step-content">
-          <div class="step-title">Teams Web Browser Version Audit</div>
-          <div class="step-desc">Use NinjaRMM to pull browser versions across managed endpoints. Identify clients with browser update gaps or BYOD users accessing Teams via web. Push update policies and communicate to affected users before the May 15 hard cutoff.</div>
+          <div class="step-title">🚨 Purview Endpoint DLP Diagnostics — Decide This Week</div>
+          <div class="step-body">The opt-out window closes this week (second week of April). Review each applicable Business Premium client tenant in Purview and make an explicit decision: opt out or accept the default (recommended for most). Document the decision per tenant in Hudu. After the window, the default is on but admins can still opt out later.</div>
         </div>
       </div>
 
-      <div class="step-card">
-        <div class="step-num step-num-3">3</div>
+      <div class="step-item p1">
+        <div class="step-num">03</div>
         <div class="step-content">
-          <div class="step-title">M365 Pricing Renewal Review</div>
-          <div class="step-desc">Pull all client renewal dates against the July 1, 2026 cutoff. Begin proactive renewal conversations for any client renewing after July 1 — especially Business Premium and E3. Frame around value-adds (Defender P1, Intune bundles) to justify proactive renewal and open upsell conversations.</div>
+          <div class="step-title">📋 SharePoint Legacy Compliance &amp; ACS Feature Audit</div>
+          <div class="step-body">Run the Microsoft 365 Assessment Tool on client tenants that may have Information Management Policies, In-Place Records, SharePoint 2013 workflows, or ACS app registrations. These retirements are live now — silent breakage is possible. Migrate to Purview Data Lifecycle Management for any active compliance configurations.</div>
         </div>
       </div>
 
-      <div class="step-card">
-        <div class="step-num step-num-4">4</div>
+      <div class="step-item p2">
+        <div class="step-num">04</div>
         <div class="step-content">
-          <div class="step-title">InfoPath Assessment Across All Client Tenants</div>
-          <div class="step-desc">Run the Microsoft 365 Assessment Tool against every client tenant and review the classicinfopath.csv output. Any active InfoPath usage = initiate a migration project immediately. No extension is available and no migration tool is provided — July 14 is a hard stop.</div>
+          <div class="step-title">💰 Prepare Client Pricing Impact Summaries</div>
+          <div class="step-body">Build a per-client breakdown showing July 1 pricing changes against their current seat counts. Lead with the Business Premium "unchanged at $22" story — the Standard→Premium gap just shrank from $9.50 to $8. Prioritize clients with renewals after July 1. Identify early-renewal candidates to lock in current pricing.</div>
         </div>
       </div>
 
-      <div class="step-card">
-        <div class="step-num step-num-5">5</div>
+      <div class="step-item p2">
+        <div class="step-num">05</div>
         <div class="step-content">
-          <div class="step-title">SharePoint OTP → Entra B2B External Access Review</div>
-          <div class="step-desc">For any client that shares SharePoint/OneDrive with external parties, review external sharing reports in the SharePoint Admin Center. Identify OTP-authenticated external users. Confirm Entra B2B email OTP is enabled in Entra External ID settings. Communicate the May–July transition timeline proactively to prevent helpdesk tickets.</div>
+          <div class="step-title">📱 Intune iOS Device Audit — Before April 30</div>
+          <div class="step-body">Pull iOS version reports from Intune for all clients with Defender for iOS deployed. Identify any iOS 16 devices that will lose Defender coverage on April 30. Communicate to affected clients this week — frame it as a security coverage gap, not just a software update.</div>
         </div>
       </div>
 
-      <div class="step-card">
-        <div class="step-num step-num-6">6</div>
+      <div class="step-item p3">
+        <div class="step-num">06</div>
         <div class="step-content">
-          <div class="step-title">Enable Teams Suspicious Call Reporting in Defender</div>
-          <div class="step-desc">Pre-configure the required Defender portal setting before the April 15 rollout. Include guidance in your next client security awareness communication — especially for finance, HR, and executive admin roles who are most targeted by vishing attacks. Update security awareness training materials accordingly.</div>
+          <div class="step-title">📅 SharePoint OTP External Sharing Assessment</div>
+          <div class="step-body">Begin identifying which clients actively use OTP-based external sharing for vendors or partners. Check SharePoint admin center external sharing settings and review sharing link reports. Start planning Entra B2B guest account migration well before July. This is a classic "no ticket today, P1 ticket in July" scenario if not handled proactively.</div>
         </div>
       </div>
 
     </div>
   </div>
 
-</div>
+</div><!-- /main -->
 
 <div class="footer">
-  Tech River MSP · M365 Weekly Briefing · Week of March 30, 2026 · 
-  Sources: Microsoft 365 Roadmap, Message Center, ChangePilot, SharePoint Stuff, T-Minus365 · 
-  For internal team use only
+  <div class="footer-text">Tech River MSP · M365 Weekly Briefing · April 6, 2026</div>
+  <div class="footer-text">Sources: Microsoft 365 Roadmap · Message Center · TechCommunity · AdminDroid · SuperSimple365</div>
 </div>
 
 <script>
-  function switchTab(name) {
-    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById('tab-' + name).classList.add('active');
-    event.target.classList.add('active');
-  }
+function showTab(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tabs button').forEach(b => b.classList.remove('active'));
+  document.getElementById('section-' + id).classList.add('active');
+  event.target.classList.add('active');
+}
 </script>
 </body>
 </html>
